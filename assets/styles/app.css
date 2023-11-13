@@ -1,3 +1,42 @@
 body {
     background-color: lightgray;
 }
+
+.owl-carousel .owl-nav{}
+.owl-carousel .owl-nav button{
+    position: absolute;
+    left: 0; top: 0;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px !important;
+    color: #fff !important; font-weight:900 !important;
+    background: Orgba(0,0,0,0.1) !important;
+}
+.owl-carousel .owl-nav .owl-prev{} 
+.owl-carousel .owl-nav .owl-next{right:0;left:auto;} 
+.owl-carousel .owl-nav .owl-prev.disabled, 
+.owl-carousel .owl-navowl-next.disabled{display:none;}
+.owl-carousel .owl-dots{
+    position: absolute;
+    left: calc(50% - 66px);
+    bottom: 10px;
+}
+.owl-carousel button.owl-dot{
+    width: 40px;
+    height: 7px;
+    margin: 2px;
+    background: #fff;
+}
+.owl-carousel button.owl-dot.active{
+    background: Orgb (255, 183, 0);
+} 
+
+.carousel-btn{
+    position: absolute;
+    left: calc(50% - 116px);
+    bottom: 50px;
+    z-index: 1;
+}
