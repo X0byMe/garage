@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\AdRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
+use App\Repository\AdRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: AdRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Ad
 {
     #[ORM\Id]
@@ -46,8 +48,8 @@ class Ad
     #[ORM\Column(length: 255)]
     private ?string $Fuel = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: '0')]
-    private ?string $FirstRelease = null;
+    #[ORM\Column()]
+    private ?int $FirstRelease = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Transmission = null;
@@ -70,7 +72,7 @@ class Ad
     {
         if (empty($this->slug)) {
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->title);
+            $this->slug = $slugify->slugify($this->brand . ' ' . $this->model);
         }
     }
 
@@ -127,7 +129,7 @@ class Ad
 
     public function setMainImg(string $MainImg): static
     {
-        $this->model = $MainImg;
+        $this->MainImg = $MainImg;
 
         return $this;
     }
@@ -204,12 +206,12 @@ class Ad
         return $this;
     }
 
-    public function getFirstRelease(): ?string
+    public function getFirstRelease(): ?int
     {
         return $this->FirstRelease;
     }
 
-    public function setFirstRelease(string $FirstRelease): static
+    public function setFirstRelease(int $FirstRelease): static
     {
         $this->FirstRelease = $FirstRelease;
 
